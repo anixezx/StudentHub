@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="StudentHub — your personal learning and productivity space.">
+<title>StudentHub | Learn. Track. Grow.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#" data-page="home">
+            <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+            <span>Student<span class="brand-accent">Hub</span></span>
+        </a>
+        <div class="sidebar-label">WORKSPACE</div>
+        <nav class="side-nav" aria-label="Main navigation">
+            <button class="nav-link active" data-page="home"><i class="bi bi-house-door"></i><span>Home</span></button>
+            <button class="nav-link" data-page="dashboard"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></button>
+            <button class="nav-link" data-page="courses"><i class="bi bi-book"></i><span>My courses</span><span class="nav-count" id="courseNavCount">4</span></button>
+            <button class="nav-link" data-page="materials"><i class="bi bi-folder2-open"></i><span>Learning materials</span><span class="nav-count">8</span></button>
+            <button class="nav-link" data-page="tasks"><i class="bi bi-check2-square"></i><span>Assignments</span></button>
+            <button class="nav-link" data-page="scores"><i class="bi bi-trophy"></i><span>Scores & rewards</span></button>
+            <button class="nav-link" data-page="community"><i class="bi bi-chat-square-text"></i><span>Community</span></button>
+            <div class="sidebar-label sidebar-label-spaced">DISCOVER</div>
+            <button class="nav-link" data-page="about"><i class="bi bi-info-circle"></i><span>About StudentHub</span></button>
+            <button class="nav-link" data-page="contact"><i class="bi bi-envelope"></i><span>Contact</span></button>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="sidebar-tip">
+                <div class="tip-icon"><i class="bi bi-lightbulb"></i></div>
+                <strong>A little progress adds up.</strong>
+                <p>Small study sessions can build powerful habits.</p>
+                <button class="text-button" id="sidebarTipButton">New tip <i class="bi bi-arrow-right"></i></button>
+            </div>
+            <button class="profile-mini" id="profileButton">
+                <span class="avatar" id="sidebarAvatar">S</span>
+                <span class="profile-mini-text"><strong id="sidebarName">Student</strong><small>Learning account</small></span>
+                <i class="bi bi-three-dots"></i>
+            </button>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="icon-button mobile-menu" id="menuButton" aria-label="Open menu"><i class="bi bi-list"></i></button>
+                <div class="breadcrumb"><span>Workspace</span><i class="bi bi-chevron-right"></i><strong id="pageCrumb">Home</strong></div>
+            </div>
+            <div class="topbar-actions">
+                <div class="date-chip"><i class="bi bi-calendar3"></i><span id="todayLabel">Today</span></div>
+                <button class="icon-button" id="themeToggle" aria-label="Toggle theme"><i class="bi bi-moon-stars"></i></button>
+                <button class="icon-button notification-button" id="notificationButton" aria-label="Notifications"><i class="bi bi-bell"></i><span class="notification-dot"></span></button>
+                <button class="top-avatar" id="topAvatar">S</button>
+            </div>
+        </header>
+
+        <div class="page-container">
+            <!-- HOME -->
+            <section class="page-section active" id="page-home">
+                <div class="welcome-row">
+                    <div>
+                        <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR PERSONAL LEARNING SPACE</div>
+                        <h1>Make today <span class="text-gradient">count<span id="welcomeName"></span>.</span></h1>
+                        <p class="muted lead">A calmer, smarter way to organize your learning and celebrate every step forward.</p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary" data-go="dashboard"><i class="bi bi-grid-1x2"></i> Open dashboard</button>
+                            <button class="btn btn-soft" data-go="courses"><i class="bi bi-journal-bookmark"></i> Explore courses</button>
+                        </div>
+                    </div>
+                    <div class="hero-art" aria-hidden="true">
+                        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+                        <div class="hero-book"><i class="bi bi-book-half"></i></div>
+                        <span class="float-card float-card-one"><i class="bi bi-stars"></i> Keep growing</span>
+                        <span class="float-card float-card-two"><i class="bi bi-check-circle-fill"></i> One task at a time</span>
+                    </div>
+                </div>
+
+                <div class="stat-grid home-stats">
+                    <article class="stat-card"><div class="stat-icon blue"><i class="bi bi-journal-check"></i></div><div><span class="stat-label">Active courses</span><strong id="homeCourseCount">4</strong><small>Ready to explore</small></div></article>
+                    <article class="stat-card"><div class="stat-icon green"><i class="bi bi-check2-circle"></i></div><div><span class="stat-label">Tasks completed</span><strong id="homeCompletedCount">0</strong><small>Every finish matters</small></div></article>
+                    <article class="stat-card"><div class="stat-icon purple"><i class="bi bi-lightning-charge"></i></div><div><span class="stat-label">Your XP</span><strong id="homeXp">0</strong><small>Learning points earned</small></div></article>
+                    <article class="stat-card"><div class="stat-icon orange"><i class="bi bi-fire"></i></div><div><span class="stat-label">Study streak</span><strong><span id="homeStreak">0</span> days</strong><small>Build your rhythm</small></div></article>
+                </div>
+
+                <div class="section-heading"><div><span class="eyebrow">YOUR SPACE</span><h2>Pick up where you left off</h2></div><button class="text-button" data-go="dashboard">View dashboard <i class="bi bi-arrow-up-right"></i></button></div>
+                <div class="home-feature-grid">
+                    <article class="feature-panel feature-panel-large">
+                        <div class="panel-topline"><span class="panel-icon"><i class="bi bi-calendar2-check"></i></span><span class="pill pill-blue">Stay on track</span></div>
+                        <h3>Plan your next study session</h3><p class="muted">Add assignments, set due dates, and make your workload feel manageable.</p>
+                        <button class="btn btn-primary btn-small" data-go="tasks">Manage assignments <i class="bi bi-arrow-right"></i></button>
+                        <div class="panel-decoration"><i class="bi bi-list-check"></i></div>
+                    </article>
+                    <article class="feature-panel feature-panel-accent">
+                        <div class="panel-topline"><span class="panel-icon"><i class="bi bi-stopwatch"></i></span><span class="pill pill-white">Focus time</span></div>
+                        <h3>Give your attention a home.</h3><p>Try a focused 25-minute session with a short break afterward.</p>
+                        <button class="btn btn-white btn-small" data-go="dashboard">Start focusing <i class="bi bi-arrow-right"></i></button>
+                    </article>
+                    <article class="feature-panel feature-panel-wide">
+                        <div class="feature-wide-copy"><span class="panel-icon"><i class="bi bi-chat-heart"></i></span><h3>Learning is better together.</h3><p class="muted">Share a thought, ask a question, or encourage another learner.</p><button class="text-button" data-go="community">Visit community <i class="bi bi-arrow-right"></i></button></div>
+                        <div class="community-bubbles"><span><i class="bi bi-chat"></i></span><span><i class="bi bi-heart-fill"></i></span><span><i class="bi bi-lightbulb"></i></span></div>
+                    </article>
+                </div>
+                <div class="quote-card"><i class="bi bi-quote"></i><p id="dailyQuote">The secret of getting ahead is getting started.</p><span id="quoteAuthor">— Mark Twain</span><button class="icon-button quote-refresh" id="newQuoteButton" aria-label="New quote"><i class="bi bi-arrow-repeat"></i></button></div>
+            </section>
+
+            <!-- DASHBOARD -->
+            <section class="page-section" id="page-dashboard">
+                <div class="page-title-row"><div><span class="eyebrow">YOUR OVERVIEW</span><h1>Dashboard</h1><p class="muted">A snapshot of your learning activity.</p></div><button class="btn btn-primary" data-go="tasks"><i class="bi bi-plus-lg"></i> Add a task</button></div>
+                <div class="stat-grid">
+                    <article class="stat-card"><div class="stat-icon blue"><i class="bi bi-book"></i></div><div><span class="stat-label">Courses</span><strong id="dashCourses">4</strong><small>In your library</small></div></article>
+                    <article class="stat-card"><div class="stat-icon green"><i class="bi bi-check-circle"></i></div><div><span class="stat-label">Completed tasks</span><strong id="dashCompleted">0</strong><small>Nice work</small></div></article>
+                    <article class="stat-card"><div class="stat-icon orange"><i class="bi bi-hourglass-split"></i></div><div><span class="stat-label">Pending tasks</span><strong id="dashPending">0</strong><small>Keep moving</small></div></article>
+                    <article class="stat-card"><div class="stat-icon purple"><i class="bi bi-award"></i></div><div><span class="stat-label">Total XP</span><strong id="dashXp">0</strong><small>Earn more by learning</small></div></article>
+                </div>
+                <div class="dashboard-grid">
+                    <article class="card-panel progress-panel">
+                        <div class="panel-heading"><div><h3>Task progress</h3><p class="muted">Your completed assignments</p></div><span class="big-percent" id="taskPercent">0%</span></div>
+                        <div class="progress-track"><div class="progress-fill" id="taskProgressFill"></div></div>
+                        <div class="progress-legend"><span><i class="legend-dot done"></i> Completed</span><span><i class="legend-dot todo"></i> Remaining</span></div>
+                        <div class="mini-summary"><div><strong id="progressDone">0</strong><small>Done</small></div><div><strong id="progressLeft">0</strong><small>To do</small></div><div><strong id="progressTotal">0</strong><small>Total</small></div></div>
+                    </article>
+                    <article class="card-panel">
+                        <div class="panel-heading"><div><h3>Quick notes</h3><p class="muted">Keep an idea close.</p></div><i class="bi bi-pencil-square panel-heading-icon"></i></div>
+                        <textarea id="quickNotes" class="notes-area" placeholder="Write a reminder, formula, or idea..."></textarea>
+                        <div class="notes-footer"><span id="notesStatus">Saved on this device</span><button class="btn btn-soft btn-small" id="saveNotesButton">Save notes</button></div>
+                    </article>
+                    <article class="card-panel timer-panel">
+                        <div class="panel-heading"><div><h3>Focus timer</h3><p class="muted">A little focus goes a long way.</p></div><i class="bi bi-stopwatch panel-heading-icon"></i></div>
+                        <div class="timer-display" id="timerDisplay">25:00</div>
+                        <div class="timer-mode" id="timerMode">FOCUS SESSION</div>
+                        <div class="timer-controls"><button class="btn btn-primary" id="timerStart"><i class="bi bi-play-fill"></i> Start</button><button class="btn btn-soft" id="timerReset"><i class="bi bi-arrow-counterclockwise"></i> Reset</button></div>
+                        <div class="timer-presets"><button data-minutes="25" class="preset active">25 min</button><button data-minutes="15" class="preset">15 min</button><button data-minutes="5" class="preset">5 min break</button></div>
+                    </article>
+                    <article class="card-panel deadline-panel">
+                        <div class="panel-heading"><div><h3>Upcoming assignments</h3><p class="muted">What needs your attention?</p></div><button class="text-button" data-go="tasks">See all</button></div>
+                        <div id="dashboardUpcoming" class="upcoming-list"><div class="empty-state compact">No assignments yet. Add your first task.</div></div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- COURSES -->
+            <section class="page-section" id="page-courses">
+                <div class="page-title-row"><div><span class="eyebrow">LEARNING LIBRARY</span><h1>My courses</h1><p class="muted">Organize the subjects you are learning.</p></div><button class="btn btn-primary" id="addCourseButton"><i class="bi bi-plus-lg"></i> Add course</button></div>
+                <div class="toolbar"><div class="search-box"><i class="bi bi-search"></i><input id="courseSearch" type="search" placeholder="Search your courses..."></div><span class="muted" id="courseResultCount">4 courses</span></div>
+                <div class="course-grid" id="courseGrid"></div>
+                <div class="empty-state hidden" id="courseEmpty"><i class="bi bi-journal-x"></i><h3>No courses found</h3><p>Try another search or add a new course.</p></div>
+            </section>
+
+            <!-- LEARNING MATERIALS -->
+            <section class="page-section" id="page-materials">
+                <div class="page-title-row"><div><span class="eyebrow">OPEN LEARNING LIBRARY</span><h1>Learning materials</h1><p class="muted">Browse and download the Grade 9 and Grade 10 textbooks added to StudentHub.</p></div><span class="pill pill-blue"><i class="bi bi-cloud-arrow-down"></i> 8 textbooks</span></div>
+                <div class="materials-highlight"><div class="materials-highlight-icon"><i class="bi bi-bookshelf"></i></div><div><h3>Your study library is growing.</h3><p>Choose a grade, find a subject, then open the PDF or download it for offline study.</p></div></div>
+                <div class="toolbar materials-toolbar"><div class="search-box"><i class="bi bi-search"></i><input id="materialSearch" type="search" placeholder="Search textbooks or subjects..."></div><div class="filter-tabs" id="materialGradeFilters"><button class="filter-tab active" data-grade="all">All grades</button><button class="filter-tab" data-grade="9">Grade 9</button><button class="filter-tab" data-grade="10">Grade 10</button></div><span class="muted" id="materialResultCount">8 materials</span></div>
+                <div class="materials-grid" id="materialsGrid"></div>
+                <div class="empty-state hidden" id="materialsEmpty"><i class="bi bi-folder-x"></i><h3>No materials found</h3><p>Try a different subject or grade.</p></div>
+                <div class="notice-box materials-notice"><i class="bi bi-info-circle"></i><div><strong>About access and sharing</strong><p>These PDFs are included in this website folder. When StudentHub is published with its materials folder, visitors can open and download them. Check that you have permission to redistribute each textbook before making the files publicly available.</p></div></div>
+            </section>
+
+            <!-- ASSIGNMENTS -->
+            <section class="page-section" id="page-tasks">
+                <div class="page-title-row"><div><span class="eyebrow">PLAN YOUR WORK</span><h1>Assignments</h1><p class="muted">Turn big goals into small, finishable steps.</p></div><button class="btn btn-primary" id="addTaskButton"><i class="bi bi-plus-lg"></i> New assignment</button></div>
+                <div class="task-summary-row"><div class="task-summary"><span class="stat-icon blue"><i class="bi bi-list-task"></i></span><div><strong id="taskTotalCount">0</strong><small>Total tasks</small></div></div><div class="task-summary"><span class="stat-icon green"><i class="bi bi-check2"></i></span><div><strong id="taskDoneCount">0</strong><small>Completed</small></div></div><div class="task-summary"><span class="stat-icon orange"><i class="bi bi-clock"></i></span><div><strong id="taskTodoCount">0</strong><small>Pending</small></div></div></div>
+                <div class="toolbar task-toolbar"><div class="filter-tabs" id="taskFilters"><button class="filter-tab active" data-filter="all">All tasks</button><button class="filter-tab" data-filter="pending">Pending</button><button class="filter-tab" data-filter="completed">Completed</button></div><div class="search-box search-box-small"><i class="bi bi-search"></i><input id="taskSearch" type="search" placeholder="Find a task..."></div></div>
+                <div class="task-list" id="taskList"></div>
+                <div class="empty-state hidden" id="taskEmpty"><i class="bi bi-clipboard-check"></i><h3>Nothing here yet</h3><p>Add an assignment and make your next step clear.</p><button class="btn btn-primary" id="emptyAddTask">Add assignment</button></div>
+            </section>
+
+            <!-- SCORES -->
+            <section class="page-section" id="page-scores">
+                <div class="page-title-row"><div><span class="eyebrow">CELEBRATE YOUR PROGRESS</span><h1>Scores & rewards</h1><p class="muted">Your effort deserves to be seen.</p></div><button class="btn btn-primary" data-go="quiz"><i class="bi bi-play-circle"></i> Take a quick quiz</button></div>
+                <div class="reward-hero"><div><span class="pill pill-white">YOUR LEARNING LEVEL</span><h2 id="levelTitle">Curious Beginner</h2><p>Keep learning, completing tasks, and taking quizzes to earn experience points.</p><div class="xp-line"><span><strong id="scoreXp">0</strong> XP</span><span id="xpToNext">100 XP to next level</span></div><div class="xp-track"><div class="xp-fill" id="xpProgress"></div></div></div><div class="reward-trophy"><i class="bi bi-trophy-fill"></i></div></div>
+                <div class="stat-grid score-stats"><article class="stat-card"><div class="stat-icon purple"><i class="bi bi-stars"></i></div><div><span class="stat-label">Total XP</span><strong id="scoreTotalXp">0</strong><small>Experience points</small></div></article><article class="stat-card"><div class="stat-icon green"><i class="bi bi-patch-check"></i></div><div><span class="stat-label">Quizzes taken</span><strong id="quizCount">0</strong><small>Practice makes progress</small></div></article><article class="stat-card"><div class="stat-icon orange"><i class="bi bi-bullseye"></i></div><div><span class="stat-label">Best quiz score</span><strong id="bestScore">—</strong><small>Your personal best</small></div></article><article class="stat-card"><div class="stat-icon blue"><i class="bi bi-award"></i></div><div><span class="stat-label">Badges earned</span><strong id="badgeCount">0</strong><small>Milestones reached</small></div></article></div>
+                <div class="section-heading"><div><span class="eyebrow">MILESTONES</span><h2>Your achievements</h2></div></div>
+                <div class="badge-grid" id="badgeGrid"></div>
+                <div class="section-heading"><div><span class="eyebrow">PRACTICE</span><h2>Quick knowledge check</h2></div></div>
+                <div class="quiz-card" id="quizCard"><div class="quiz-intro" id="quizIntro"><span class="quiz-icon"><i class="bi bi-lightning-charge-fill"></i></span><div><h3>Ready for a mini challenge?</h3><p class="muted">Answer five general learning questions. Earn XP for every correct answer.</p></div><button class="btn btn-primary" id="startQuiz">Start quiz <i class="bi bi-arrow-right"></i></button></div><div class="quiz-content hidden" id="quizContent"><div class="quiz-progress-line"><span id="quizQuestionNumber">Question 1 of 5</span><span id="quizLiveScore">0 correct</span></div><div class="progress-track"><div class="progress-fill" id="quizProgressFill"></div></div><h3 id="quizQuestion">Question text</h3><div class="quiz-options" id="quizOptions"></div><div class="quiz-bottom"><span id="quizFeedback" aria-live="polite"></span><button class="btn btn-primary hidden" id="nextQuestion">Next question <i class="bi bi-arrow-right"></i></button></div></div><div class="quiz-result hidden" id="quizResult"><div class="result-medal"><i class="bi bi-award-fill"></i></div><h3 id="quizResultTitle">Well done!</h3><p id="quizResultText"></p><button class="btn btn-primary" id="retryQuiz">Try again</button></div></div>
+                <div class="section-heading"><div><span class="eyebrow">YOUR HISTORY</span><h2>Recent quiz results</h2></div></div>
+                <div class="card-panel"><div id="quizHistory" class="history-list"><div class="empty-state compact">Your quiz results will appear here.</div></div></div>
+            </section>
+
+            <!-- QUIZ ROUTE -->
+            <section class="page-section" id="page-quiz">
+                <div class="page-title-row"><div><span class="eyebrow">QUICK PRACTICE</span><h1>Knowledge challenge</h1><p class="muted">A short practice session to sharpen your mind.</p></div><button class="btn btn-soft" data-go="scores"><i class="bi bi-arrow-left"></i> Back to scores</button></div>
+                <div class="quiz-card standalone-quiz"><div class="quiz-intro" id="standaloneQuizIntro"><span class="quiz-icon"><i class="bi bi-lightning-charge-fill"></i></span><div><h3>Five questions. One little challenge.</h3><p class="muted">Try your best. You can learn from every answer.</p></div><button class="btn btn-primary" id="startStandaloneQuiz">Begin</button></div><div class="quiz-content hidden" id="standaloneQuizContent"><div class="quiz-progress-line"><span id="standaloneQuestionNumber">Question 1 of 5</span><span id="standaloneLiveScore">0 correct</span></div><div class="progress-track"><div class="progress-fill" id="standaloneProgressFill"></div></div><h3 id="standaloneQuestion">Question</h3><div class="quiz-options" id="standaloneOptions"></div><div class="quiz-bottom"><span id="standaloneFeedback"></span><button class="btn btn-primary hidden" id="standaloneNext">Next</button></div></div><div class="quiz-result hidden" id="standaloneResult"><div class="result-medal"><i class="bi bi-award-fill"></i></div><h3 id="standaloneResultTitle">Finished!</h3><p id="standaloneResultText"></p><button class="btn btn-primary" id="standaloneRetry">Play again</button></div></div>
+            </section>
+
+            <!-- COMMUNITY -->
+            <section class="page-section" id="page-community">
+                <div class="page-title-row"><div><span class="eyebrow">LEARN TOGETHER</span><h1>Community</h1><p class="muted">Share ideas, ask questions, and encourage each other.</p></div><span class="pill pill-green"><i class="bi bi-circle-fill"></i> Friendly space</span></div>
+                <div class="community-layout"><div class="community-main"><div class="compose-card"><div class="compose-top"><span class="avatar" id="composeAvatar">S</span><textarea id="postInput" placeholder="What are you learning or thinking about today?"></textarea></div><div class="compose-bottom"><span class="muted">Be kind. Be curious. Help others grow.</span><button class="btn btn-primary btn-small" id="publishPost"><i class="bi bi-send"></i> Share post</button></div></div><div class="feed-tools"><strong>Community feed</strong><span class="muted" id="postCount">0 posts</span></div><div id="postFeed" class="post-feed"></div><div class="empty-state hidden" id="feedEmpty"><i class="bi bi-chat-square-heart"></i><h3>Start the conversation</h3><p>Share a question, a discovery, or a small win.</p></div></div><aside class="community-aside"><div class="card-panel community-guidelines"><span class="panel-icon"><i class="bi bi-heart"></i></span><h3>Community values</h3><ul><li><i class="bi bi-check-circle"></i> Be respectful</li><li><i class="bi bi-check-circle"></i> Ask thoughtful questions</li><li><i class="bi bi-check-circle"></i> Encourage progress</li><li><i class="bi bi-check-circle"></i> Keep personal details private</li></ul></div><div class="card-panel"><h3>Conversation starters</h3><button class="starter" data-starter="What is one thing you learned this week?">What did you learn this week?</button><button class="starter" data-starter="What study technique works best for you?">Share a study technique</button><button class="starter" data-starter="What topic would you like help understanding?">Ask for help with a topic</button></div></aside></div>
+            </section>
+
+            <!-- ABOUT -->
+            <section class="page-section" id="page-about">
+                <div class="about-hero"><span class="eyebrow">OUR STORY</span><h1>A better space to <span class="text-gradient">learn and grow.</span></h1><p class="lead muted">StudentHub is a simple learning companion designed to help students turn good intentions into consistent action.</p><div class="about-symbol"><i class="bi bi-mortarboard-fill"></i></div></div>
+                <div class="about-content-grid"><article class="card-panel"><span class="panel-icon"><i class="bi bi-compass"></i></span><h3>Our mission</h3><p class="muted">Make everyday learning feel more organized, encouraging, and achievable. We bring useful study tools into one friendly workspace.</p></article><article class="card-panel"><span class="panel-icon"><i class="bi bi-eye"></i></span><h3>Our vision</h3><p class="muted">A world where students can focus less on managing scattered tasks and more on curiosity, understanding, and meaningful progress.</p></article><article class="card-panel"><span class="panel-icon"><i class="bi bi-gem"></i></span><h3>Our values</h3><p class="muted">Consistency over perfection, curiosity over fear, kindness in community, and progress that belongs to every learner.</p></article></div>
+                <div class="section-heading"><div><span class="eyebrow">WHAT YOU CAN DO</span><h2>One workspace, useful tools</h2></div></div><div class="about-feature-list"><div><i class="bi bi-calendar2-check"></i><span><strong>Organize</strong><small>Keep assignments and due dates in one place.</small></span></div><div><i class="bi bi-stopwatch"></i><span><strong>Focus</strong><small>Use a simple timer to protect study time.</small></span></div><div><i class="bi bi-graph-up"></i><span><strong>Measure progress</strong><small>See completed tasks, quiz scores, and XP.</small></span></div><div><i class="bi bi-people"></i><span><strong>Connect</strong><small>Share ideas and learn with a friendly community.</small></span></div></div>
+                <div class="notice-box"><i class="bi bi-info-circle"></i><div><strong>A note about this demo</strong><p>StudentHub currently runs in your browser. Your tasks, notes, posts, and scores are saved locally on this device. It does not yet provide real online accounts, shared cloud storage, or live messaging between different users.</p></div></div>
+            </section>
+
+            <!-- CONTACT -->
+            <section class="page-section" id="page-contact">
+                <div class="page-title-row"><div><span class="eyebrow">WE'RE HERE TO HELP</span><h1>Contact us</h1><p class="muted">Questions, ideas, or feedback? Send a message using the form.</p></div></div>
+                <div class="contact-grid"><div class="contact-info"><div class="contact-info-heading"><span class="panel-icon"><i class="bi bi-chat-dots"></i></span><h2>Let's talk.</h2><p>We value thoughtful feedback. Use the form and your message will be saved in this browser demo.</p></div><div class="contact-method"><span><i class="bi bi-envelope"></i></span><div><strong>Email concept</strong><small>hello@studenthub.example</small></div></div><div class="contact-method"><span><i class="bi bi-clock"></i></span><div><strong>Typical response</strong><small>This demo does not send real emails.</small></div></div><div class="contact-method"><span><i class="bi bi-geo-alt"></i></span><div><strong>Online learning space</strong><small>Designed for students everywhere.</small></div></div><div class="contact-note"><i class="bi bi-shield-check"></i> Please do not include passwords, private records, or sensitive personal information.</div></div><form class="card-panel contact-form" id="contactForm"><h3>Send a message</h3><p class="muted">All fields are required.</p><label for="contactName">Your name</label><input id="contactName" name="name" type="text" placeholder="Enter your name" required minlength="2"><label for="contactEmail">Email address</label><input id="contactEmail" name="email" type="email" placeholder="you@example.com" required><label for="contactSubject">Subject</label><select id="contactSubject" name="subject" required><option value="">Choose a subject</option><option>General question</option><option>Suggestion</option><option>Report a problem</option><option>Other</option></select><label for="contactMessage">Message</label><textarea id="contactMessage" name="message" rows="5" placeholder="How can we help?" required minlength="10"></textarea><button class="btn btn-primary full-width" type="submit"><i class="bi bi-send"></i> Save message</button><p class="form-feedback" id="contactFeedback" aria-live="polite"></p></form></div>
+            </section>
+        </div>
+        <footer class="footer"><span>© <span id="footerYear"></span> StudentHub</span><span>Made for curious minds <i class="bi bi-heart-fill"></i></span><button class="text-button" data-go="about">About this project</button></footer>
+    </main>
+</div>
+
+<!-- TASK MODAL -->
+<div class="modal-backdrop hidden" id="taskModal">
+    <form class="modal-card" id="taskForm">
+        <div class="modal-heading"><div><span class="eyebrow">TASK MANAGER</span><h2 id="taskModalTitle">Add assignment</h2></div><button type="button" class="icon-button" data-close="taskModal"><i class="bi bi-x-lg"></i></button></div>
+        <label for="taskTitle">Assignment title</label><input id="taskTitle" required maxlength="80" placeholder="e.g. Review chapter three">
+        <label for="taskSubject">Subject</label><input id="taskSubject" required maxlength="40" placeholder="e.g. Physics">
+        <div class="form-two"><div><label for="taskDue">Due date</label><input id="taskDue" type="date" required></div><div><label for="taskPriority">Priority</label><select id="taskPriority"><option value="normal">Normal</option><option value="high">High</option><option value="low">Low</option></select></div></div>
+        <div class="modal-actions"><button type="button" class="btn btn-soft" data-close="taskModal">Cancel</button><button class="btn btn-primary" type="submit">Save assignment</button></div>
+    </form>
+</div>
+
+<!-- COURSE MODAL -->
+<div class="modal-backdrop hidden" id="courseModal">
+    <form class="modal-card" id="courseForm">
+        <div class="modal-heading"><div><span class="eyebrow">COURSE LIBRARY</span><h2>Add a course</h2></div><button type="button" class="icon-button" data-close="courseModal"><i class="bi bi-x-lg"></i></button></div>
+        <label for="newCourseName">Course name</label><input id="newCourseName" required maxlength="50" placeholder="e.g. Biology">
+        <label for="newCourseDescription">Short description</label><textarea id="newCourseDescription" rows="3" maxlength="140" placeholder="What are you learning?"></textarea>
+        <label for="newCourseColor">Course color</label><select id="newCourseColor"><option value="blue">Blue</option><option value="green">Green</option><option value="purple">Purple</option><option value="orange">Orange</option></select>
+        <div class="modal-actions"><button type="button" class="btn btn-soft" data-close="courseModal">Cancel</button><button class="btn btn-primary" type="submit">Add course</button></div>
+    </form>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-backdrop hidden" id="profileModal">
+    <form class="modal-card" id="profileForm">
+        <div class="modal-heading"><div><span class="eyebrow">YOUR PROFILE</span><h2>Personalize StudentHub</h2></div><button type="button" class="icon-button" data-close="profileModal"><i class="bi bi-x-lg"></i></button></div>
+        <label for="studentNameInput">Display name</label><input id="studentNameInput" maxlength="24" placeholder="What should we call you?">
+        <p class="muted small-text">Your name is stored only in this browser.</p>
+        <div class="modal-actions"><button type="button" class="btn btn-soft" data-close="profileModal">Cancel</button><button class="btn btn-primary" type="submit">Save profile</button></div>
+    </form>
+</div>
+
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+<script>
+/* =========================================================
+   STUDENTHUB — FRONT-END APPLICATION
+   Data is stored in this browser using localStorage.
+   ========================================================= */
+
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const STORAGE = {
+    theme: "sh_theme",
+    name: "sh_name",
+    tasks: "sh_tasks",
+    courses: "sh_courses",
+    notes: "sh_notes",
+    xp: "sh_xp",
+    streak: "sh_streak",
+    lastStudy: "sh_last_study",
+    posts: "sh_posts",
+    quizHistory: "sh_quiz_history",
+    messages: "sh_messages",
+    likes: "sh_likes"
+};
+
+function readStore(key, fallback) {
+    try {
+        const value = localStorage.getItem(key);
+        return value === null ? fallback : JSON.parse(value);
+    } catch (error) {
+        console.warn("Could not read saved data:", key, error);
+        return fallback;
+    }
+}
+function writeStore(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+    } catch (error) {
+        showToast("Your browser could not save this change.", "warning");
+        return false;
+    }
+}
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+    }[char]));
+}
+function makeId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+}
+function showToast(message, type = "success") {
+    const toast = document.createElement("div");
+    toast.className = `toast-message toast-${type}`;
+    toast.innerHTML = `<i class="bi ${type === "success" ? "bi-check-circle-fill" : type === "warning" ? "bi-exclamation-circle-fill" : "bi-info-circle-fill"}"></i><span>${escapeHTML(message)}</span>`;
+    $("#toastContainer").appendChild(toast);
+    setTimeout(() => toast.classList.add("toast-visible"), 10);
+    setTimeout(() => {
+        toast.classList.remove("toast-visible");
+        setTimeout(() => toast.remove(), 250);
+    }, 3000);
+}
+function todayISO() {
+    const now = new Date();
+    const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 10);
+}
+function formatDate(dateString) {
+    if (!dateString) return "No due date";
+    const date = new Date(dateString + "T00:00:00");
+    return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+}
+
+/* -------------------- APPLICATION STATE -------------------- */
+let studentName = localStorage.getItem(STORAGE.name) || "Student";
+let tasks = readStore(STORAGE.tasks, []);
+let courses = readStore(STORAGE.courses, [
+    { id: "c1", name: "Mathematics", description: "Build confidence with numbers, patterns, and problem solving.", color: "blue", icon: "bi-calculator" },
+    { id: "c2", name: "Physics", description: "Explore the rules that explain motion, energy, and the universe.", color: "purple", icon: "bi-atom" },
+    { id: "c3", name: "Chemistry", description: "Understand matter, reactions, and the world at a molecular level.", color: "green", icon: "bi-droplet-half" },
+    { id: "c4", name: "Computer Science", description: "Practice logic, digital skills, and creative problem solving.", color: "orange", icon: "bi-code-slash" }
+]);
+let xp = Number(localStorage.getItem(STORAGE.xp) || 0);
+let streak = Number(localStorage.getItem(STORAGE.streak) || 0);
+let currentFilter = "all";
+let editingTaskId = null;
+
+/* -------------------- LEARNING MATERIALS -------------------- */
+const learningMaterials = [
+    { grade: 9, subject: "Biology", file: "G9-Biology-STB-2023-web.pdf", size: "PDF textbook", icon: "bi-virus", color: "green" },
+    { grade: 9, subject: "Chemistry", file: "G9-Chemistry-STB-2023-web.pdf", size: "PDF textbook", icon: "bi-flask", color: "purple" },
+    { grade: 9, subject: "English", file: "G9-English-STB-2023-web.pdf", size: "PDF textbook", icon: "bi-translate", color: "blue" },
+    { grade: 9, subject: "Mathematics", file: "G9-Mathematics-STB-2023-web.pdf", size: "PDF textbook", icon: "bi-calculator", color: "orange" },
+    { grade: 9, subject: "Physics", file: "G9-Physics-STB-2023-web.pdf", size: "PDF textbook", icon: "bi-atom", color: "blue" },
+    { grade: 10, subject: "Biology", file: "G10-Biology-STB-2023-web.pdf", size: "PDF textbook", icon: "bi-virus", color: "green" },
+    { grade: 10, subject: "Chemistry", file: "G10-Chemistry-STB-2023-web.pdf", size: "PDF textbook", icon: "bi-flask", color: "purple" },
+    { grade: 10, subject: "English", file: "G10-English-STB-2023-web.pdf", size: "PDF textbook", icon: "bi-translate", color: "blue" }
+];
+let materialGrade = "all";
+function renderMaterials() {
+    const query = (document.getElementById("materialSearch")?.value || "").trim().toLowerCase();
+    const visible = learningMaterials.filter(item => (materialGrade === "all" || String(item.grade) === materialGrade) && (`grade ${item.grade} ${item.subject} ${item.file}`).toLowerCase().includes(query));
+    const grid = document.getElementById("materialsGrid");
+    if (!grid) return;
+    grid.innerHTML = visible.map(item => {
+        const href = `materials/textbooks/${item.file}`;
+        return `<article class="material-card"><div class="material-card-top"><span class="material-icon ${item.color}"><i class="bi ${item.icon}"></i></span><span class="pill pill-blue">Grade ${item.grade}</span></div><div class="material-copy"><span class="material-type">STUDENT TEXTBOOK · PDF</span><h3>${item.subject}</h3><p class="muted">Grade ${item.grade} ${item.subject} student textbook.</p></div><div class="material-actions"><a class="btn btn-soft btn-small" href="${href}" target="_blank" rel="noopener"><i class="bi bi-eye"></i> Open</a><a class="btn btn-primary btn-small" href="${href}" download><i class="bi bi-download"></i> Download</a></div></article>`;
+    }).join("");
+    document.getElementById("materialResultCount").textContent = `${visible.length} ${visible.length === 1 ? "material" : "materials"}`;
+    document.getElementById("materialsEmpty").classList.toggle("hidden", visible.length > 0);
+}
+document.getElementById("materialSearch")?.addEventListener("input", renderMaterials);
+document.getElementById("materialGradeFilters")?.addEventListener("click", event => {
+    const button = event.target.closest("[data-grade]");
+    if (!button) return;
+    materialGrade = button.dataset.grade;
+    document.querySelectorAll("#materialGradeFilters .filter-tab").forEach(tab => tab.classList.toggle("active", tab === button));
+    renderMaterials();
+});
+
+/* -------------------- NAVIGATION -------------------- */
+function navigate(page) {
+    const target = $(`#page-${page}`);
+    if (!target) {
+        showToast("That page is not available.", "warning");
+        return;
+    }
+    $$(".page-section").forEach(section => section.classList.remove("active"));
+    target.classList.add("active");
+    $$(".nav-link").forEach(button => button.classList.toggle("active", button.dataset.page === page));
+    $("#pageCrumb").textContent = page === "quiz" ? "Knowledge challenge" : page.charAt(0).toUpperCase() + page.slice(1);
+    $("#sidebar").classList.remove("sidebar-open");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (page === "dashboard") renderDashboard();
+    if (page === "courses") renderCourses();
+    if (page === "materials") renderMaterials();
+    if (page === "tasks") renderTasks();
+    if (page === "scores") renderScores();
+    if (page === "community") renderPosts();
+}
+$$("[data-page]").forEach(button => button.addEventListener("click", () => navigate(button.dataset.page)));
+$$("[data-go]").forEach(button => button.addEventListener("click", () => navigate(button.dataset.go)));
+$("#menuButton").addEventListener("click", () => $("#sidebar").classList.toggle("sidebar-open"));
+document.addEventListener("click", event => {
+    if (window.innerWidth <= 900 && !event.target.closest("#sidebar") && !event.target.closest("#menuButton")) {
+        $("#sidebar").classList.remove("sidebar-open");
+    }
+});
+
+/* -------------------- THEME AND PROFILE -------------------- */
+function applyTheme(theme) {
+    document.body.classList.toggle("dark-theme", theme === "dark");
+    $("#themeToggle").innerHTML = theme === "dark" ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>';
+    localStorage.setItem(STORAGE.theme, theme);
+}
+applyTheme(localStorage.getItem(STORAGE.theme) || "light");
+$("#themeToggle").addEventListener("click", () => {
+    applyTheme(document.body.classList.contains("dark-theme") ? "light" : "dark");
+});
+function initials(name) {
+    return name.trim().split(/\s+/).map(part => part[0]).join("").slice(0, 2).toUpperCase() || "S";
+}
+function renderProfile() {
+    const shortName = studentName.split(" ")[0];
+    $("#welcomeName").textContent = shortName === "Student" ? "" : `, ${shortName}`;
+    $("#sidebarName").textContent = studentName;
+    $("#sidebarAvatar").textContent = initials(studentName);
+    $("#topAvatar").textContent = initials(studentName);
+    $("#composeAvatar").textContent = initials(studentName);
+}
+renderProfile();
+$("#profileButton").addEventListener("click", () => {
+    $("#studentNameInput").value = studentName === "Student" ? "" : studentName;
+    openModal("profileModal");
+});
+$("#topAvatar").addEventListener("click", () => $("#profileButton").click());
+$("#profileForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const value = $("#studentNameInput").value.trim();
+    if (value.length < 2) return showToast("Please enter at least two characters.", "warning");
+    studentName = value;
+    localStorage.setItem(STORAGE.name, studentName);
+    renderProfile();
+    closeModal("profileModal");
+    showToast("Profile updated. Welcome!");
+});
+
+/* -------------------- DATE AND DAILY QUOTE -------------------- */
+const now = new Date();
+$("#todayLabel").textContent = now.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+$("#footerYear").textContent = now.getFullYear();
+const quotes = [
+    ["The secret of getting ahead is getting started.", "Mark Twain"],
+    ["It always seems impossible until it's done.", "Nelson Mandela"],
+    ["Great things are done by a series of small things brought together.", "Vincent van Gogh"],
+    ["Learning never exhausts the mind.", "Leonardo da Vinci"],
+    ["Success is the sum of small efforts, repeated day in and day out.", "Robert Collier"],
+    ["Believe you can and you're halfway there.", "Theodore Roosevelt"]
+];
+function newQuote() {
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    $("#dailyQuote").textContent = quote[0];
+    $("#quoteAuthor").textContent = "— " + quote[1];
+}
+$("#newQuoteButton").addEventListener("click", newQuote);
+const tips = ["Try explaining a difficult idea in your own words.", "Put your phone away for one focused study session.", "Take a short break after concentrating for a while.", "Review yesterday's notes before starting something new.", "Start with the smallest task if you feel overwhelmed."];
+$("#sidebarTipButton").addEventListener("click", () => showToast(tips[Math.floor(Math.random() * tips.length)], "info"));
+
+/* -------------------- XP AND STUDY STREAK -------------------- */
+function awardXP(amount, reason) {
+    xp += amount;
+    localStorage.setItem(STORAGE.xp, xp);
+    showToast(`+${amount} XP — ${reason}`);
+    renderStats();
+    renderScores();
+}
+function recordStudyDay() {
+    const today = todayISO();
+    const last = localStorage.getItem(STORAGE.lastStudy);
+    if (last === today) return;
+    if (last) {
+        const previous = new Date(last + "T00:00:00");
+        const current = new Date(today + "T00:00:00");
+        const difference = Math.round((current - previous) / 86400000);
+        streak = difference === 1 ? streak + 1 : 1;
+    } else {
+        streak = 1;
+    }
+    localStorage.setItem(STORAGE.lastStudy, today);
+    localStorage.setItem(STORAGE.streak, streak);
+    renderStats();
+}
+function taskCounts() {
+    return {
+        total: tasks.length,
+        done: tasks.filter(task => task.completed).length,
+        pending: tasks.filter(task => !task.completed).length
+    };
+}
+function renderStats() {
+    const count = taskCounts();
+    $("#homeCourseCount").textContent = courses.length;
+    $("#courseNavCount").textContent = courses.length;
+    $("#homeCompletedCount").textContent = count.done;
+    $("#homeXp").textContent = xp;
+    $("#homeStreak").textContent = streak;
+    $("#dashCourses").textContent = courses.length;
+    $("#dashCompleted").textContent = count.done;
+    $("#dashPending").textContent = count.pending;
+    $("#dashXp").textContent = xp;
+    $("#taskTotalCount").textContent = count.total;
+    $("#taskDoneCount").textContent = count.done;
+    $("#taskTodoCount").textContent = count.pending;
+    $("#progressDone").textContent = count.done;
+    $("#progressLeft").textContent = count.pending;
+    $("#progressTotal").textContent = count.total;
+    const percent = count.total ? Math.round(count.done / count.total * 100) : 0;
+    $("#taskPercent").textContent = percent + "%";
+    $("#taskProgressFill").style.width = percent + "%";
+}
+
+/* -------------------- MODALS -------------------- */
+function openModal(id) {
+    const modal = $("#" + id);
+    if (modal) {
+        modal.classList.remove("hidden");
+        document.body.classList.add("modal-open");
+        const firstInput = modal.querySelector("input, textarea, select");
+        if (firstInput) setTimeout(() => firstInput.focus(), 100);
+    }
+}
+function closeModal(id) {
+    const modal = $("#" + id);
+    if (modal) modal.classList.add("hidden");
+    if (!$(".modal-backdrop:not(.hidden)")) document.body.classList.remove("modal-open");
+}
+$$("[data-close]").forEach(button => button.addEventListener("click", () => closeModal(button.dataset.close)));
+$$(".modal-backdrop").forEach(backdrop => backdrop.addEventListener("click", event => {
+    if (event.target === backdrop) closeModal(backdrop.id);
+}));
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") $$(".modal-backdrop:not(.hidden)").forEach(modal => closeModal(modal.id));
+});
+
+/* -------------------- ASSIGNMENT MANAGEMENT -------------------- */
+function openTaskModal(task = null) {
+    editingTaskId = task ? task.id : null;
+    $("#taskModalTitle").textContent = task ? "Edit assignment" : "Add assignment";
+    $("#taskTitle").value = task ? task.title : "";
+    $("#taskSubject").value = task ? task.subject : "";
+    $("#taskDue").value = task ? task.due : todayISO();
+    $("#taskPriority").value = task ? task.priority : "normal";
+    openModal("taskModal");
+}
+$("#addTaskButton").addEventListener("click", () => openTaskModal());
+$("#emptyAddTask").addEventListener("click", () => openTaskModal());
+$("#taskForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const title = $("#taskTitle").value.trim();
+    const subject = $("#taskSubject").value.trim();
+    const due = $("#taskDue").value;
+    if (!title || !subject || !due) return showToast("Please complete every field.", "warning");
+    if (editingTaskId) {
+        const task = tasks.find(item => item.id === editingTaskId);
+        Object.assign(task, { title, subject, due, priority: $("#taskPriority").value });
+        showToast("Assignment updated.");
+    } else {
+        tasks.unshift({ id: makeId(), title, subject, due, priority: $("#taskPriority").value, completed: false, created: Date.now() });
+        showToast("Assignment added.");
+    }
+    writeStore(STORAGE.tasks, tasks);
+    closeModal("taskModal");
+    renderTasks();
+    renderDashboard();
+    renderStats();
+});
+function toggleTask(id) {
+    const task = tasks.find(item => item.id === id);
+    if (!task) return;
+    task.completed = !task.completed;
+    writeStore(STORAGE.tasks, tasks);
+    if (task.completed) {
+        awardXP(10, "assignment completed");
+        recordStudyDay();
+    }
+    renderTasks();
+    renderDashboard();
+    renderStats();
+}
+function deleteTask(id) {
+    if (!confirm("Delete this assignment?")) return;
+    tasks = tasks.filter(task => task.id !== id);
+    writeStore(STORAGE.tasks, tasks);
+    renderTasks();
+    renderDashboard();
+    renderStats();
+    showToast("Assignment deleted.", "info");
+}
+function taskMarkup(task) {
+    const overdue = !task.completed && task.due < todayISO();
+    return `<article class="task-row ${task.completed ? "task-is-done" : ""}">
+        <button class="task-check-button" data-task-toggle="${task.id}" aria-label="Toggle task">${task.completed ? '<i class="bi bi-check-lg"></i>' : ""}</button>
+        <div class="task-main"><strong>${escapeHTML(task.title)}</strong><span>${escapeHTML(task.subject)} <span class="task-separator">•</span> <span class="${overdue ? "overdue-text" : ""}">${overdue ? "Overdue · " : "Due "}${formatDate(task.due)}</span></span></div>
+        <span class="priority priority-${task.priority}">${task.priority}</span>
+        <div class="task-actions"><button class="icon-button small-icon" data-task-edit="${task.id}" aria-label="Edit"><i class="bi bi-pencil"></i></button><button class="icon-button small-icon danger-icon" data-task-delete="${task.id}" aria-label="Delete"><i class="bi bi-trash3"></i></button></div>
+    </article>`;
+}
+function renderTasks() {
+    const search = ($("#taskSearch").value || "").toLowerCase();
+    let visible = tasks.filter(task => currentFilter === "all" || (currentFilter === "completed" ? task.completed : !task.completed));
+    visible = visible.filter(task => `${task.title} ${task.subject}`.toLowerCase().includes(search));
+    visible.sort((a, b) => a.completed - b.completed || a.due.localeCompare(b.due));
+    $("#taskList").innerHTML = visible.map(taskMarkup).join("");
+    $("#taskEmpty").classList.toggle("hidden", visible.length > 0);
+    renderStats();
+}
+$("#taskFilters").addEventListener("click", event => {
+    const button = event.target.closest("[data-filter]");
+    if (!button) return;
+    currentFilter = button.dataset.filter;
+    $$(".filter-tab").forEach(tab => tab.classList.toggle("active", tab === button));
+    renderTasks();
+});
+$("#taskSearch").addEventListener("input", renderTasks);
+$("#taskList").addEventListener("click", event => {
+    const toggle = event.target.closest("[data-task-toggle]");
+    const edit = event.target.closest("[data-task-edit]");
+    const remove = event.target.closest("[data-task-delete]");
+    if (toggle) toggleTask(toggle.dataset.taskToggle);
+    if (edit) openTaskModal(tasks.find(task => task.id === edit.dataset.taskEdit));
+    if (remove) deleteTask(remove.dataset.taskDelete);
+});
+
+/* -------------------- DASHBOARD RENDERING -------------------- */
+function renderDashboard() {
+    renderStats();
+    const notes = localStorage.getItem(STORAGE.notes) || "";
+    if ($("#quickNotes") && document.activeElement !== $("#quickNotes")) $("#quickNotes").value = notes;
+    const upcoming = tasks.filter(task => !task.completed).sort((a, b) => a.due.localeCompare(b.due)).slice(0, 4);
+    $("#dashboardUpcoming").innerHTML = upcoming.length ? upcoming.map(task => `<div class="upcoming-item"><span class="upcoming-date">${new Date(task.due + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span><span><strong>${escapeHTML(task.title)}</strong><small>${escapeHTML(task.subject)}</small></span><span class="priority priority-${task.priority}">${task.priority}</span></div>`).join("") : '<div class="empty-state compact">No pending assignments. Add a task when you are ready.</div>';
+}
+$("#saveNotesButton").addEventListener("click", () => {
+    localStorage.setItem(STORAGE.notes, $("#quickNotes").value);
+    $("#notesStatus").textContent = "Saved just now";
+    showToast("Your notes have been saved.");
+});
+$("#quickNotes").addEventListener("input", () => $("#notesStatus").textContent = "Unsaved changes");
+
+/* -------------------- FOCUS TIMER -------------------- */
+let timerSeconds = 25 * 60;
+let timerInterval = null;
+let timerRunning = false;
+function updateTimer() {
+    const minutes = Math.floor(timerSeconds / 60).toString().padStart(2, "0");
+    const seconds = (timerSeconds % 60).toString().padStart(2, "0");
+    $("#timerDisplay").textContent = `${minutes}:${seconds}`;
+}
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerRunning = false;
+    $("#timerStart").innerHTML = '<i class="bi bi-play-fill"></i> Start';
+}
+function startTimer() {
+    if (timerRunning) {
+        stopTimer();
+        return;
+    }
+    timerRunning = true;
+    $("#timerStart").innerHTML = '<i class="bi bi-pause-fill"></i> Pause';
+    timerInterval = setInterval(() => {
+        timerSeconds--;
+        updateTimer();
+        if (timerSeconds <= 0) {
+            stopTimer();
+            $("#timerMode").textContent = "SESSION COMPLETE";
+            recordStudyDay();
+            awardXP(5, "focus session completed");
+            showToast("Focus session complete. Take a short break!");
+            if ("Notification" in window && Notification.permission === "granted") new Notification("StudentHub", { body: "Your focus session is complete." });
+        }
+    }, 1000);
+}
+$("#timerStart").addEventListener("click", startTimer);
+$("#timerReset").addEventListener("click", () => {
+    stopTimer();
+    timerSeconds = Number($(".preset.active").dataset.minutes) * 60;
+    $("#timerMode").textContent = "FOCUS SESSION";
+    updateTimer();
+});
+$$(".preset").forEach(button => button.addEventListener("click", () => {
+    $$(".preset").forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+    stopTimer();
+    timerSeconds = Number(button.dataset.minutes) * 60;
+    $("#timerMode").textContent = button.dataset.minutes === "5" ? "SHORT BREAK" : "FOCUS SESSION";
+    updateTimer();
+}));
+
+/* -------------------- COURSE LIBRARY -------------------- */
+const courseIcons = ["bi-calculator", "bi-atom", "bi-droplet-half", "bi-code-slash", "bi-globe", "bi-translate", "bi-brush", "bi-music-note"];
+function renderCourses() {
+    const query = ($("#courseSearch").value || "").toLowerCase();
+    const visible = courses.filter(course => `${course.name} ${course.description}`.toLowerCase().includes(query));
+    $("#courseGrid").innerHTML = visible.map(course => `<article class="course-card"><div class="course-card-top"><span class="course-icon ${course.color}"><i class="bi ${course.icon || "bi-book"}"></i></span><button class="icon-button small-icon" data-course-delete="${course.id}" aria-label="Delete course"><i class="bi bi-three-dots"></i></button></div><h3>${escapeHTML(course.name)}</h3><p>${escapeHTML(course.description || "A subject in your learning library.")}</p><div class="course-card-bottom"><span><i class="bi bi-bookmark"></i> Personal course</span><span class="course-arrow"><i class="bi bi-arrow-up-right"></i></span></div></article>`).join("");
+    $("#courseEmpty").classList.toggle("hidden", visible.length > 0);
+    $("#courseResultCount").textContent = `${visible.length} course${visible.length === 1 ? "" : "s"}`;
+    renderStats();
+}
+$("#courseSearch").addEventListener("input", renderCourses);
+$("#addCourseButton").addEventListener("click", () => openModal("courseModal"));
+$("#courseForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const name = $("#newCourseName").value.trim();
+    if (!name) return;
+    if (courses.some(course => course.name.toLowerCase() === name.toLowerCase())) return showToast("That course already exists.", "warning");
+    courses.push({ id: makeId(), name, description: $("#newCourseDescription").value.trim(), color: $("#newCourseColor").value, icon: courseIcons[courses.length % courseIcons.length] });
+    writeStore(STORAGE.courses, courses);
+    $("#courseForm").reset();
+    closeModal("courseModal");
+    renderCourses();
+    showToast("Course added to your library.");
+    awardXP(3, "new course added");
+});
+$("#courseGrid").addEventListener("click", event => {
+    const button = event.target.closest("[data-course-delete]");
+    if (!button) return;
+    const course = courses.find(item => item.id === button.dataset.courseDelete);
+    if (!course || !confirm(`Remove ${course.name} from your courses?`)) return;
+    courses = courses.filter(item => item.id !== course.id);
+    writeStore(STORAGE.courses, courses);
+    renderCourses();
+    showToast("Course removed.", "info");
+});
+
+/* -------------------- QUIZ ENGINE -------------------- */
+const quizQuestions = [
+    { q: "Which part of a plant mainly absorbs water from the soil?", a: ["Leaves", "Roots", "Flowers", "Stem"], correct: 1, explain: "Roots absorb water and minerals from the soil." },
+    { q: "What does HTML mainly describe?", a: ["The structure of a web page", "The computer's battery", "A database server", "A network cable"], correct: 0, explain: "HTML provides the structure and meaning of web content." },
+    { q: "What is the SI unit of force?", a: ["Joule", "Watt", "Newton", "Pascal"], correct: 2, explain: "Force is measured in newtons (N)." },
+    { q: "Which number is a prime number?", a: ["21", "27", "29", "33"], correct: 2, explain: "29 has exactly two positive factors: 1 and 29." },
+    { q: "Which gas do humans need for aerobic respiration?", a: ["Oxygen", "Helium", "Hydrogen", "Neon"], correct: 0, explain: "Oxygen is used by cells during aerobic respiration." },
+    { q: "What is the chemical symbol for sodium?", a: ["S", "So", "Na", "N"], correct: 2, explain: "Na comes from the Latin name natrium." },
+    { q: "Which device directs data between computer networks?", a: ["Keyboard", "Router", "Monitor", "Scanner"], correct: 1, explain: "A router forwards data packets between networks." },
+    { q: "What is 12 × 8?", a: ["86", "92", "96", "108"], correct: 2, explain: "12 multiplied by 8 equals 96." }
+];
+let activeQuiz = null;
+function makeQuizSession() {
+    return [...quizQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
+}
+function startQuizUI(prefix) {
+    const standalone = prefix === "standalone";
+    const prefixId = standalone ? "standaloneQuiz" : "quiz";
+    const intro = $("#" + prefixId + "Intro");
+    const content = $("#" + prefixId + "Content");
+    const result = $("#" + prefixId + "Result");
+    intro.classList.add("hidden");
+    result.classList.add("hidden");
+    content.classList.remove("hidden");
+    activeQuiz = { prefix, questions: makeQuizSession(), index: 0, correct: 0, answered: false };
+    renderQuizQuestion();
+}
+function quizElement(name) {
+    const prefix = activeQuiz.prefix === "standalone" ? "standalone" : "quiz";
+    return $("#" + prefix + name);
+}
+function renderQuizQuestion() {
+    const q = activeQuiz.questions[activeQuiz.index];
+    const index = activeQuiz.index;
+    quizElement("QuestionNumber").textContent = `Question ${index + 1} of ${activeQuiz.questions.length}`;
+    quizElement("LiveScore").textContent = `${activeQuiz.correct} correct`;
+    quizElement("ProgressFill").style.width = `${index / activeQuiz.questions.length * 100}%`;
+    quizElement("Question").textContent = q.q;
+    quizElement("Feedback").textContent = "";
+    quizElement("Next").classList.add("hidden");
+    quizElement("Options").innerHTML = q.a.map((answer, i) => `<button class="quiz-option" data-answer="${i}"><span class="option-letter">${String.fromCharCode(65 + i)}</span>${escapeHTML(answer)}</button>`).join("");
+    activeQuiz.answered = false;
+}
+function answerQuiz(index) {
+    if (activeQuiz.answered) return;
+    activeQuiz.answered = true;
+    const q = activeQuiz.questions[activeQuiz.index];
+    const correct = index === q.correct;
+    if (correct) activeQuiz.correct++;
+    $$(".quiz-option", quizElement("Options")).forEach((button, i) => {
+        button.disabled = true;
+        if (i === q.correct) button.classList.add("answer-correct");
+        else if (i === index) button.classList.add("answer-wrong");
+    });
+    quizElement("Feedback").textContent = (correct ? "Correct! " : "Not quite. ") + q.explain;
+    quizElement("LiveScore").textContent = `${activeQuiz.correct} correct`;
+    quizElement("Next").classList.remove("hidden");
+    quizElement("ProgressFill").style.width = `${(activeQuiz.index + 1) / activeQuiz.questions.length * 100}%`;
+}
+function finishQuiz() {
+    const session = activeQuiz;
+    const standalone = session.prefix === "standalone";
+    const prefix = standalone ? "standalone" : "";
+    const content = $("#" + prefix + "QuizContent");
+    const result = $("#" + prefix + "QuizResult");
+    content.classList.add("hidden");
+    result.classList.remove("hidden");
+    const percent = Math.round(session.correct / session.questions.length * 100);
+    const earned = session.correct * 10;
+    $("#" + prefix + "ResultTitle").textContent = percent >= 80 ? "Excellent work!" : percent >= 60 ? "Nice effort!" : "Keep practicing!";
+    $("#" + prefix + "ResultText").textContent = `You answered ${session.correct} out of ${session.questions.length} correctly (${percent}%). You earned ${earned} XP.`;
+    const history = readStore(STORAGE.quizHistory, []);
+    history.unshift({ id: makeId(), date: new Date().toISOString(), correct: session.correct, total: session.questions.length, percent });
+    writeStore(STORAGE.quizHistory, history.slice(0, 20));
+    if (earned) awardXP(earned, "quiz completed");
+    recordStudyDay();
+    renderScores();
+}
+function nextQuizQuestion() {
+    if (activeQuiz.index < activeQuiz.questions.length - 1) {
+        activeQuiz.index++;
+        renderQuizQuestion();
+    } else {
+        finishQuiz();
+    }
+}
+$("#startQuiz").addEventListener("click", () => startQuizUI("scores"));
+$("#startStandaloneQuiz").addEventListener("click", () => startQuizUI("standalone"));
+$("#quizOptions").addEventListener("click", event => {
+    const option = event.target.closest("[data-answer]");
+    if (option) answerQuiz(Number(option.dataset.answer));
+});
+$("#standaloneOptions").addEventListener("click", event => {
+    const option = event.target.closest("[data-answer]");
+    if (option) answerQuiz(Number(option.dataset.answer));
+});
+$("#nextQuestion").addEventListener("click", nextQuizQuestion);
+$("#standaloneNext").addEventListener("click", nextQuizQuestion);
+$("#retryQuiz").addEventListener("click", () => startQuizUI("scores"));
+$("#standaloneRetry").addEventListener("click", () => startQuizUI("standalone"));
+
+/* -------------------- SCORES AND ACHIEVEMENTS -------------------- */
+const badgeDefinitions = [
+    { id: "first-task", icon: "bi-check2-circle", title: "First step", detail: "Complete your first assignment.", test: () => tasks.some(task => task.completed) },
+    { id: "five-tasks", icon: "bi-list-check", title: "Task finisher", detail: "Complete five assignments.", test: () => tasks.filter(task => task.completed).length >= 5 },
+    { id: "quiz-starter", icon: "bi-lightning", title: "Quiz starter", detail: "Complete your first quiz.", test: () => readStore(STORAGE.quizHistory, []).length >= 1 },
+    { id: "quiz-master", icon: "bi-trophy", title: "Quiz champion", detail: "Score 100% on a quiz.", test: () => readStore(STORAGE.quizHistory, []).some(item => item.percent === 100) },
+    { id: "curious", icon: "bi-book-half", title: "Curious mind", detail: "Add three courses.", test: () => courses.length >= 3 },
+    { id: "xp-100", icon: "bi-stars", title: "Century club", detail: "Earn 100 XP.", test: () => xp >= 100 },
+    { id: "focus", icon: "bi-stopwatch", title: "Focused learner", detail: "Complete a focus session.", test: () => xp >= 5 }
+];
+function getLevel() {
+    const levels = [{ min: 0, title: "Curious Beginner" }, { min: 100, title: "Bright Explorer" }, { min: 250, title: "Knowledge Builder" }, { min: 500, title: "Learning Champion" }, { min: 1000, title: "Master Mind" }];
+    return [...levels].reverse().find(level => xp >= level.min);
+}
+function renderScores() {
+    const history = readStore(STORAGE.quizHistory, []);
+    const best = history.length ? Math.max(...history.map(item => item.percent)) : null;
+    const level = getLevel();
+    const nextLevel = [100, 250, 500, 1000, 2000].find(value => xp < value) || 2000;
+    const previousLevel = [0, 100, 250, 500, 1000].filter(value => xp >= value).pop() || 0;
+    $("#scoreXp").textContent = xp;
+    $("#scoreTotalXp").textContent = xp;
+    $("#quizCount").textContent = history.length;
+    $("#bestScore").textContent = best === null ? "—" : best + "%";
+    $("#levelTitle").textContent = level.title;
+    $("#xpToNext").textContent = `${Math.max(0, nextLevel - xp)} XP to next level`;
+    $("#xpProgress").style.width = `${Math.min(100, (xp - previousLevel) / (nextLevel - previousLevel) * 100)}%`;
+    const earned = badgeDefinitions.filter(badge => badge.test());
+    $("#badgeCount").textContent = earned.length;
+    $("#badgeGrid").innerHTML = badgeDefinitions.map(badge => {
+        const unlocked = earned.some(item => item.id === badge.id);
+        return `<article class="badge-card ${unlocked ? "unlocked" : "locked"}"><span class="badge-medal"><i class="bi ${badge.icon}"></i></span><strong>${badge.title}</strong><small>${badge.detail}</small><span class="badge-status">${unlocked ? '<i class="bi bi-check-circle-fill"></i> Unlocked' : '<i class="bi bi-lock-fill"></i> Locked'}</span></article>`;
+    }).join("");
+    $("#quizHistory").innerHTML = history.length ? history.map(item => `<div class="history-row"><span class="history-icon"><i class="bi bi-lightning-charge"></i></span><span><strong>Knowledge challenge</strong><small>${new Date(item.date).toLocaleDateString()} · ${item.correct}/${item.total} correct</small></span><strong class="history-score">${item.percent}%</strong></div>`).join("") : '<div class="empty-state compact">Your quiz results will appear here.</div>';
+}
+
+/* -------------------- COMMUNITY POSTS -------------------- */
+let posts = readStore(STORAGE.posts, [
+    { id: "welcome-post", author: "StudentHub Team", initials: "SH", date: new Date().toISOString(), text: "Welcome to the StudentHub community! Share a learning win, ask a question, or encourage someone today. 🌱", likes: 2, comments: [] }
+]);
+function renderPosts() {
+    $("#postCount").textContent = `${posts.length} post${posts.length === 1 ? "" : "s"}`;
+    $("#feedEmpty").classList.toggle("hidden", posts.length > 0);
+    $("#postFeed").innerHTML = posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).map(post => {
+        const comments = post.comments || [];
+        return `<article class="post-card" data-post-id="${post.id}"><div class="post-header"><span class="avatar">${escapeHTML(post.initials)}</span><div><strong>${escapeHTML(post.author)}</strong><small>${new Date(post.date).toLocaleString()}</small></div>${post.author === studentName ? `<button class="icon-button small-icon post-delete" data-post-delete="${post.id}" aria-label="Delete post"><i class="bi bi-trash3"></i></button>` : ""}</div><p class="post-text">${escapeHTML(post.text).replace(/\n/g, "<br>")}</p><div class="post-actions"><button data-like="${post.id}" class="${readStore(STORAGE.likes, []).includes(post.id) ? "liked" : ""}"><i class="bi bi-heart${readStore(STORAGE.likes, []).includes(post.id) ? "-fill" : ""}"></i> ${post.likes || 0} likes</button><button data-comment-toggle="${post.id}"><i class="bi bi-chat"></i> ${comments.length} comments</button></div><div class="comment-area hidden" id="comments-${post.id}"><div class="comment-list">${comments.map(comment => `<div class="comment-item"><strong>${escapeHTML(comment.author)}</strong><span>${escapeHTML(comment.text)}</span></div>`).join("")}</div><form class="comment-form" data-comment-form="${post.id}"><input name="comment" required maxlength="240" placeholder="Write a kind comment..."><button aria-label="Send comment"><i class="bi bi-send"></i></button></form></div></article>`;
+    }).join("");
+}
+$("#publishPost").addEventListener("click", () => {
+    const text = $("#postInput").value.trim();
+    if (text.length < 3) return showToast("Write a little more before sharing.", "warning");
+    posts.unshift({ id: makeId(), author: studentName, initials: initials(studentName), date: new Date().toISOString(), text, likes: 0, comments: [] });
+    writeStore(STORAGE.posts, posts);
+    $("#postInput").value = "";
+    renderPosts();
+    awardXP(2, "community contribution");
+});
+$$(".starter").forEach(button => button.addEventListener("click", () => {
+    $("#postInput").value = button.dataset.starter;
+    $("#postInput").focus();
+}));
+$("#postFeed").addEventListener("click", event => {
+    const like = event.target.closest("[data-like]");
+    const toggle = event.target.closest("[data-comment-toggle]");
+    const remove = event.target.closest("[data-post-delete]");
+    if (like) {
+        const post = posts.find(item => item.id === like.dataset.like);
+        const liked = readStore(STORAGE.likes, []);
+        if (liked.includes(post.id)) {
+            post.likes = Math.max(0, post.likes - 1);
+            writeStore(STORAGE.likes, liked.filter(id => id !== post.id));
+        } else {
+            post.likes = (post.likes || 0) + 1;
+            liked.push(post.id);
+            writeStore(STORAGE.likes, liked);
+        }
+        writeStore(STORAGE.posts, posts);
+        renderPosts();
+    }
+    if (toggle) $("#comments-" + toggle.dataset.commentToggle).classList.toggle("hidden");
+    if (remove) {
+        const post = posts.find(item => item.id === remove.dataset.postDelete);
+        if (post && post.author === studentName && confirm("Delete your post?")) {
+            posts = posts.filter(item => item.id !== post.id);
+            writeStore(STORAGE.posts, posts);
+            renderPosts();
+        }
+    }
+});
+$("#postFeed").addEventListener("submit", event => {
+    const form = event.target.closest("[data-comment-form]");
+    if (!form) return;
+    event.preventDefault();
+    const input = $('input[name="comment"]', form);
+    const text = input.value.trim();
+    if (!text) return;
+    const post = posts.find(item => item.id === form.dataset.commentForm);
+    post.comments = post.comments || [];
+    post.comments.push({ author: studentName, text, date: new Date().toISOString() });
+    writeStore(STORAGE.posts, posts);
+    renderPosts();
+    $("#comments-" + post.id).classList.remove("hidden");
+});
+
+/* -------------------- CONTACT FORM -------------------- */
+$("#contactForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (!form.reportValidity()) return;
+    const messages = readStore(STORAGE.messages, []);
+    messages.unshift({
+        id: makeId(),
+        name: $("#contactName").value.trim(),
+        email: $("#contactEmail").value.trim(),
+        subject: $("#contactSubject").value,
+        message: $("#contactMessage").value.trim(),
+        date: new Date().toISOString()
+    });
+    writeStore(STORAGE.messages, messages);
+    form.reset();
+    $("#contactFeedback").textContent = "Your message was saved in this browser. This demo has not sent an email.";
+    showToast("Message saved on this device.");
+});
+
+/* -------------------- NOTIFICATIONS -------------------- */
+$("#notificationButton").addEventListener("click", () => {
+    const pending = taskCounts().pending;
+    showToast(pending ? `You have ${pending} pending assignment${pending === 1 ? "" : "s"}.` : "You are all caught up. Nice work!", "info");
+});
+
+/* -------------------- INITIAL RENDER -------------------- */
+function initializeApp() {
+    renderProfile();
+    renderStats();
+    renderTasks();
+    renderCourses();
+    renderDashboard();
+    renderScores();
+    renderPosts();
+    newQuote();
+    updateTimer();
+    // Persist the default course list on first launch.
+    if (!localStorage.getItem(STORAGE.courses)) writeStore(STORAGE.courses, courses);
+}
+initializeApp();
+</script>
+</body>
+</html>
